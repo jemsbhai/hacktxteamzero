@@ -8,17 +8,14 @@ export default function RegistrationScreen({navigation}) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    
+    const [type, setType] = useState("Donor");
 
     const onFooterLinkPress = () => {
         navigation.navigate('Login')
     }
 
     const onRegisterPress = () => {
-        if (password !== confirmPassword) {
-            alert("Passwords don't match.")
-            return
-        }
     
         firebase
             .auth()
@@ -29,6 +26,7 @@ export default function RegistrationScreen({navigation}) {
                     id: uid,
                     email,
                     fullName,
+                    type
                 };
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
@@ -55,6 +53,19 @@ export default function RegistrationScreen({navigation}) {
                     style={styles.logo}
                     source={require('../../../assets/icon.png')}
                 />
+                <View style={styles.btns}>
+                    <TouchableOpacity
+                        style={styles.lbutton}
+                        onPress={() => onFooterLinkPress()}
+                    >
+                        <Text style={styles.buttonTitle}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.rbutton}
+                    >
+                        <Text style={styles.buttonTitle}>SignUp</Text>
+                    </TouchableOpacity>
+                </View>
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'
@@ -83,24 +94,28 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Confirm Password'
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
+                <Text style={styles.txt}>Select your user type:</Text>
+                <View style={styles.bttn}>
+                    <TouchableOpacity
+                        style={[styles.lbutton, type==="Donor"? styles.dc:styles.lc]}
+                        onPress={() => setType("Donor")}
+                    >
+                        <Text style={styles.buttonTitle}>Donor</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.rbutton, type==="Donor"? styles.lc:styles.dc]}
+                        onPress={() => setType("Recipient")}
+                    >
+                        <Text style={styles.buttonTitle}>Recipient</Text>
+                    </TouchableOpacity>
+                </View>
+
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
+                    <Text style={styles.buttonTitle}>Submit</Text>
                 </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
-                </View>
+
             </KeyboardAwareScrollView>
         </View>
     )
