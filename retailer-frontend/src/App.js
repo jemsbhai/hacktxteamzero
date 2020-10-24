@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/home";
+import Inventory from "./pages/inventory/inventory";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <div>
         {/* <Header /> */}
         <Route exact path='/' component={Home}/>
+        <Route exact path="/inventory" component={Inventory}/>
         {/* <Route exact path='/' component={Landing} />
       <Route exact path='/register' component={Register} /> */}
         {/* <Bottom /> */}
