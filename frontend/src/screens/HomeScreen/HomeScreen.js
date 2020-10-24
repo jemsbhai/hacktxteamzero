@@ -10,7 +10,7 @@ export default function HomeScreen(props) {
 
     if(type === "Donor"){
         return(
-            <DonorOnboarding />
+            <DonorOnboarding {...props}/>
         )
     }
 
