@@ -13,7 +13,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#14171A"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +24,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Built by the team behind https://www.instamobile.io https://www.iosapptemplates.com https://www.instaflutter.com and https://www.instakotlin.com",
-    "githubUrl": "https://github.com/instamobile/react-native-firebase"
+    "description": "Hackathon submission"
   }
 }

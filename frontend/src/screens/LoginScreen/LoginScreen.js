@@ -48,6 +48,20 @@ export default function LoginScreen({navigation}) {
                     style={styles.logo}
                     source={require('../../../assets/icon.png')}
                 />
+
+                <View style={styles.btns}>
+                    <TouchableOpacity
+                        style={styles.lbutton}
+                    >
+                        <Text style={styles.buttonTitle}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.rbutton}
+                        onPress={() => onFooterLinkPress()}>
+                        <Text style={styles.buttonTitle}>SignUp</Text>
+                    </TouchableOpacity>
+                </View>
+
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
@@ -70,11 +84,8 @@ export default function LoginScreen({navigation}) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in</Text>
+                    <Text style={styles.buttonTitle}>Submit</Text>
                 </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
-                </View>
             </KeyboardAwareScrollView>
         </View>
     )

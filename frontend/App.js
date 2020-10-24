@@ -9,6 +9,7 @@ if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const Stack = createStackNavigator();
+console.disableYellowBox = true;
 
 export default function App() {
 
@@ -44,7 +45,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode="none">
         { user ? (
           <Stack.Screen name="Home">
             {props => <HomeScreen {...props} extraData={user} />}
