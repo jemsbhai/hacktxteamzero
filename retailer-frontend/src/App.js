@@ -1,27 +1,24 @@
-import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import { Route } from 'react-router-dom';
-import Register from './pages/register/register.page';
-import Landing from './pages/landing/landing.page';
-import { Provider } from 'react-redux';
-import store from './redux/redux';
-import Header from './component/header/header.component'
-import Footer from './component/bottom/bottom.component'
-
-
 
 function App() {
   return (
-    <Provider store={store}>
-
-    <div>
-      <Header />
-      <Route exact path='/' component={Landing} />
-      <Route exact path='/register' component={Register} />
-      <Footer />
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
-    </Provider>
-
   );
 }
 
