@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.nav {
+  width: 100%;
+}
+
+.chat{
+  position: fixed;
+  bottom: 63px;
+}
+
+.chat-wrapper{
+  padding-bottom: 63px;
+  margin-bottom: 63px;
+}
