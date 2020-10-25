@@ -5,16 +5,18 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-
+import axios from 'axios'
+import "./styles.css"
 
 const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 650,
     },
     search: {
+        margin: '20px',
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -57,23 +59,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export default function Inventory() {
     const classes = useStyles()
+    const [data, setData] = useState([])
+
+
+    useEffect(() => {
+        const URI = 'https://hackathons.azurewebsites.net/api/getinventory?fbclid=IwAR0NZMwNRDjOQ_zt5zlBMx2E_G0Lba-eTRrdH8x4-w4TyKc0wnSqJg2RfdU'
+        axios.get(URI).then(res => setData(res.data.data))
+    }, [])
 
     return (
-        <div>
+        <div className="root">
             <div>
                 <Button>Filter</Button>
                 <div className={classes.search}>
@@ -90,30 +88,34 @@ export default function Inventory() {
                     />
                 </div>
             </div>
+            <div style={{margin: '20px'}}>
             <TableContainer component={Paper}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>Item Name</TableCell>
+                        <TableCell align="right">Category</TableCell>
+                        <TableCell align="right">Sold</TableCell>
+                        <TableCell align="right">Donated</TableCell>
+                        <TableCell align="right">Backorder</TableCell>
+                        <TableCell align="right">Price</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {data.map((row) => (
                         <TableRow key={row.name}>
                             <TableCell component="th" scope="row">
                                 {row.name}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
+                            <TableCell align="right">{row.name}</TableCell>
+                            <TableCell align="right">{row.category}</TableCell>
+                            <TableCell align="right">{row.sold}</TableCell>
+                            <TableCell align="right">{row.donated}</TableCell>
+                            <TableCell align="right">{row.price}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </TableContainer>
+        </div>
         </div>
     )
 }
