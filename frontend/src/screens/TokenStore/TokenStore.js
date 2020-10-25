@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles';
 import { firebase } from '../../firebase/config';
-import { View, Text } from 'react-native'
+import { View, Text, TextInput } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const TokenStore = (props) => {
+
+  const [count, setCount] = useState(0);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Token Store</Text>
@@ -29,8 +32,20 @@ const TokenStore = (props) => {
 
       <Text style={styles.tt}>Quantity of tokens</Text>
 
-      
+          <TextInput
+                    style={styles.input}
+                    placeholderTextColor="#aaaaaa"
+                    placeholder='Input quantity'
+                    onChangeText={(text) => setCount(text)}
+                    value={count}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                    keyboardType="number-pad"
+                />
 
+          <TouchableOpacity style={styles.button}>
+            <Text>Apply</Text>
+          </TouchableOpacity>
     
     </View>
   )

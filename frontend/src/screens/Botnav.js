@@ -5,6 +5,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import LoginScreen from './LoginScreen/LoginScreen';
 import HutRec from './HutRec/HutRec';
+import Settings from './Settings/Settings';
+import Notification from './Notifications/Notification';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -29,21 +31,21 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Timeline"
-        component={LoginScreen}
+        component={Notification}
         options={{
           tabBarLabel: 'Timeline',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="timeline-plus" color={color} size={26} />
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
         name="Settings"
-        component={LoginScreen}
+        component={Settings}
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="settings" color={color} size={26} />
           ),
         }}
       />
