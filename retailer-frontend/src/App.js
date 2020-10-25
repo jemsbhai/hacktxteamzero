@@ -5,6 +5,7 @@ import { Link, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/home";
 import Inventory from "./pages/inventory/inventory";
+import Receipt from "./pages/receipt/receipt";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         {/* <Header /> */}
         <Route exact path='/' component={Home}/>
         <Route exact path="/inventory" component={Inventory}/>
+        <Route exact path='/receipt' component={Receipt}/>
         {/* <Route exact path='/' component={Landing} />
       <Route exact path='/register' component={Register} /> */}
         {/* <Bottom /> */}

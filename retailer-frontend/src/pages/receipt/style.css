@@ -1,0 +1,41 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    text-align: center; 
+    justify-content: center;
+    height: auto;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+h5 {
+    width: 250px;
+    text-align: left;
+}
+
+.underline {
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+
+.pdf {
+    width: 70%;
+    justify-content: center;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.download {
+    background-color: #34F4F9;
+    width: 30%;
+    margin: 20px;
+    margin-left: 35%;
+}
+
+button {
+    background-color: #34F4F9;
+}
