@@ -7,7 +7,7 @@ import "./home.css"
 export default function Home() {
     return (
         <div className="root">
-            <h3>Token Usage</h3>
+            <h3 style={{marginTop: '50px'}}>Token Usage</h3>
             <h5>Last Updated: Oct 24</h5>
             <div className="row">
                 <img src={Chart} />
