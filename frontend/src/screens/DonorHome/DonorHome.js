@@ -6,6 +6,9 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Back from '../../../assets/back.png';
 import Next from '../../../assets/next.png';
 import { useNavigation } from '@react-navigation/native';
+import * as Print from "expo-print";
+import * as MediaLibrary from "expo-media-library";
+import * as Sharing from "expo-sharing";
 export default function DonorHome(props) {
 
     const [entityText, setEntityText] = useState('')
@@ -19,7 +22,29 @@ export default function DonorHome(props) {
       const [ccValue, setccValue] = useState('');
       const [manualTokenValue, setManualTokenValue] = useState('');
    
- 
+      const htmlContent = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Pdf Content</title>
+          <style>
+              body {
+                  font-size: 16px;
+                  color: rgb(255, 196, 0);
+              }
+  
+              h1 {
+                  text-align: center;
+              }
+          </style>
+      </head>
+      <body>
+          <h1>Donor ID:1, Token: 100, Category: Household</h1>
+      </body>
+      </html>
+  `;
     const entityRef = firebase.firestore().collection('entities')
     const userID = props.extraData.id
     const navigation = useNavigation();
@@ -52,6 +77,33 @@ export default function DonorHome(props) {
         .then(data => console.log(data));
 
     }
+   
+const createPDF = async (htmlContent) => {
+    try {
+        const { uri } = await Print.printToFileAsync({ htmlContent });
+        console.log("Here")
+        return uri;
+    } catch (err) {
+        console.error(err);
+    }
+};
+const createAndSavePDF = async (htmlContent) => {
+    try {
+      const { uri } = await Print.printToFileAsync({ htmlContent });
+      if (Platform.OS === "ios") {
+        await Sharing.shareAsync(uri);
+      } else {
+        const permission = await MediaLibrary.requestPermissionsAsync();
+  
+        if (permission.granted) {
+          await MediaLibrary.createAssetAsync(uri);
+        }
+      }
+  
+    } catch (error) {
+      console.error(error);
+    }
+  };
     const onAddButtonPress = () => {
         if (entityText && entityText.length > 0) {
             const timestamp = firebase.firestore.FieldValue.serverTimestamp();
@@ -156,7 +208,7 @@ export default function DonorHome(props) {
                 </View>
             )} */}
              <TouchableOpacity style={styles.button} onPress={onAddButtonPress}>
-                    <Text style={styles.buttonText} onPress={()=>_submitToken(option,1,tokenValue,cValue,ccValue)}>Confirm</Text>
+                    <Text style={styles.buttonText} onPress={()=>{createPDF; createAndSavePDF;_submitToken(option,tokenValue,ccValue,cValue) }}>Confirm</Text>
                 </TouchableOpacity>
 
                 <View style={{backgroundColor:'#153745', width:'100%', height:50, borderTopLeftRadius:10, borderTopRightRadius:10, position:'absolute', bottom:0, flexDirection:'row', alignContent:'center', paddingHorizontal:'12%', paddingTop:'2%'}}>

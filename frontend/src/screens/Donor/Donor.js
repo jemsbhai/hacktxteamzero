@@ -6,6 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Back from '../../../assets/back.png';
 import Next from '../../../assets/next.png';
 import { useNavigation } from '@react-navigation/native';
+import {LineChart, PieChart} from 'react-native-chart-kit';
 export default function Donor(props) {
 
     const [entityText, setEntityText] = useState('')
@@ -21,7 +22,30 @@ export default function Donor(props) {
     const entityRef = firebase.firestore().collection('entities')
     const userID = props.extraData.id
     const navigation = useNavigation();
-
+    const data = [
+        {
+          name: "Household",
+          tokens: 21500000,
+          color: "rgba(131, 167, 234, 1)",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+        {
+          name: "Baby",
+          tokens: 2800000,
+          color: "#F00",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+        {
+          name: "Food",
+          tokens: 527612,
+          color: "red",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+       
+      ];
     useEffect(() => {
         entityRef
             .where("authorID", "==", userID)
@@ -132,6 +156,24 @@ export default function Donor(props) {
                     />
                 </View>
             )} */}
+            {/* <PieChart
+            data={data}
+            width={300}
+            height={300}
+            accessor="token"
+           
+            
+            chartConfig={{
+            backgroundColor: '#e26a00',
+            backgroundGradientFrom: '#D9D9D9',
+            backgroundGradientTo: '#FFF',
+            decimalPlaces: 0, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+      
+           }}
+           
+            /> */}
              
 
                 <View style={{backgroundColor:'#153745', width:'100%', height:50, borderTopLeftRadius:10, borderTopRightRadius:10, position:'absolute', bottom:0, flexDirection:'row', alignContent:'center', paddingHorizontal:'12%', paddingTop:'2%'}}>
