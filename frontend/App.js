@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { firebase } from './src/firebase/config'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, DonorHome } from './src/screens'
 import {decode, encode} from 'base-64'
+import Donor from './src/screens/Donor/Donor';
+import Confirm from './src/screens/ConfirmDonation/confirmDonation';
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
@@ -47,13 +49,23 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         { user ? (
-          <Stack.Screen name="Home">
-            {props => <HomeScreen {...props} extraData={user} />}
+          <>
+          <Stack.Screen name="Donor">
+            {props => <Donor {...props} extraData={user} />}
           </Stack.Screen>
+          <Stack.Screen name="DonorHome">
+            {props => <DonorHome {...props} extraData={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="confirmDonation">
+            {props => <Confirm {...props} extraData={user} />}
+          </Stack.Screen>
+          </>
+  
         ) : (
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Registration" component={RegistrationScreen} />
+         
           </>
         )}
       </Stack.Navigator>
