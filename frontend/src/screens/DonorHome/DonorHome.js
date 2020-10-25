@@ -9,6 +9,10 @@ import { useNavigation } from '@react-navigation/native';
 import * as Print from "expo-print";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
+import PDF from 'rn-pdf-generator';
+
+
+
 export default function DonorHome(props) {
 
     const [entityText, setEntityText] = useState('')
@@ -21,6 +25,7 @@ export default function DonorHome(props) {
       const [cValue, setCValue] = useState('');
       const [ccValue, setccValue] = useState('');
       const [manualTokenValue, setManualTokenValue] = useState('');
+      const [generated, setGenerated] = useState(false);
    
       const htmlContent = `
       <!DOCTYPE html>
@@ -68,25 +73,31 @@ export default function DonorHome(props) {
             )
     }, [])
     const _submitToken = (type,token,cc,cvv) => {
-        console.log(type,token, cc, cvv)
+        console.log(type,token, cc, cvv);
         fetch('http://hackathons.azurewebsites.net/api/makedonation', {
         method: "POST",
         body: JSON.stringify({"category":type,"tokens":token,"cc":cc,"cvv":cvv, "donorid":"1"}),
         })
         .then(response => response.json()) 
         .then(data => console.log(data));
-
+        setGenerated(true)
     }
    
-const createPDF = async (htmlContent) => {
-    try {
-        const { uri } = await Print.printToFileAsync({ htmlContent });
-        console.log("Here")
-        return uri;
-    } catch (err) {
-        console.error(err);
-    }
-};
+ const _generatePDF = ()=>{
+    PDF.fromHTML(`<P>HELLO WORLD</P>`, `http://www.google.com`)
+    .then(  data => console.log(data)) // WFuIGlzIGRpc3Rpbm....
+    .catch( err  =>  console.log('error->', err) )
+ }
+   
+// const createPDF = async (htmlContent) => {
+//     try {
+//         const { uri } = await Print.printToFileAsync({ htmlContent });
+//         console.log("Here")
+//         return uri;
+//     } catch (err) {
+//         console.error(err);
+//     }
+// };
 const createAndSavePDF = async (htmlContent) => {
     try {
       const { uri } = await Print.printToFileAsync({ htmlContent });
@@ -207,8 +218,16 @@ const createAndSavePDF = async (htmlContent) => {
                     />
                 </View>
             )} */}
+            {generated && 
+            <View style={{position:'absolute', height:'80%', width:'90%', backgroundColor:'#FFF', zIndex:10, borderRadius:20, marginTop:'15%'}}>
+                <Text style={{fontSize:30, alignSelf:'center', marginTop:'5%', marginBottom:'15%'}}>Invoice</Text>
+                <Text style={{fontSize:20, marginLeft:'5%'}}>Type: house</Text>
+                <Text style={{fontSize:20, marginLeft:'5%'}}>Tokens: 50</Text>
+                <Text style={{fontSize:20, marginLeft:'5%'}}>DonorID:1</Text>
+                <Text style={{fontSize:30, backgroundColor:'#1a7a7d', width:'70%', padding:'2%', textAlign:'center', alignSelf:'center', marginTop:'95%', borderRadius:20}}>Done</Text>
+                </View>}
              <TouchableOpacity style={styles.button} onPress={onAddButtonPress}>
-                    <Text style={styles.buttonText} onPress={()=>{createPDF; createAndSavePDF;_submitToken(option,tokenValue,ccValue,cValue) }}>Confirm</Text>
+                    <Text style={styles.buttonText} onPress={()=>{_submitToken(option,parseFloat(tokenValue),ccValue,cValue) }}>Confirm</Text>
                 </TouchableOpacity>
 
                 <View style={{backgroundColor:'#153745', width:'100%', height:50, borderTopLeftRadius:10, borderTopRightRadius:10, position:'absolute', bottom:0, flexDirection:'row', alignContent:'center', paddingHorizontal:'12%', paddingTop:'2%'}}>
