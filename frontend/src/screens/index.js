@@ -1,3 +1,5 @@
 export { default as LoginScreen } from './LoginScreen/LoginScreen'
 export { default as HomeScreen } from './HomeScreen/HomeScreen'
 export { default as RegistrationScreen } from './RegistrationScreen/RegistrationScreen'
+export { default as DonorHome } from './DonorHome/DonorHome'
+export { default as Donor } from './Donor/Donor'
