@@ -1,9 +1,11 @@
 .root {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    /* justify-content: center; */
+    /* text-align: center; */
     height: 100vh;
+    color: white;
+    align-items: center;
 }
 
 .row{
@@ -23,4 +25,8 @@ img{
 
 .button-wrapper{
     margin: 20px;
+}
+
+h5 {
+    text-align: center;
 }

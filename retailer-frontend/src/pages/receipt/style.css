@@ -4,6 +4,7 @@
     text-align: center; 
     justify-content: center;
     height: auto;
+    background-color: #23292b;
 }
 
 .row {
@@ -27,13 +28,14 @@ h5 {
     justify-content: center;
     margin-left: 15%;
     margin-right: 15%;
+    padding: 30px;
 }
 
 .download {
     background-color: #34F4F9;
     width: 30%;
-    margin: 20px;
-    margin-left: 35%;
+    margin: 20px; 
+    border-radius: 10px;
 }
 
 button {

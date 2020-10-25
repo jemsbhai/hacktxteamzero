@@ -6,7 +6,7 @@ import "./App.css";
 import Home from "./pages/home/home";
 import Inventory from "./pages/inventory/inventory";
 import Receipt from "./pages/receipt/receipt";
-
+import Logo from "./logo.png"
 
 function App() {
   // const dispatch = useDispatch();
@@ -14,19 +14,32 @@ function App() {
 
   return (
     <Fragment>
-      <div className="navbar-fixed navbar-top">
+      <div style={{height: '30px'}}></div>
+      <div className="root navbar-fixed navbar-top">
         <nav className="white">
           <div class="nav-wrapper">
-            <Link to="/" class="brand-logo left">
-              {/* <img src={Logo}></img> */}
-            </Link>
+            {/* <Link to="/" class="brand-logo left">
+              <img src={Logo}></img>
+            </Link> */}
             <ul class="right">
               <li>
                 <Link
-                  to="/logreg/login"
+                  to="/"
                   class="waves-effect waves-light btn btn-base btn-small-radius"
                 >
-                  Login/ Register
+                  Home
+                </Link>
+                <Link
+                  to="/inventory"
+                  class="waves-effect waves-light btn btn-base btn-small-radius"
+                >
+                  Inventory
+                </Link>
+                <Link
+                  to="/receipt"
+                  class="waves-effect waves-light btn btn-base btn-small-radius"
+                >
+                  Charitable Donation Receipt
                 </Link>
               </li>
             </ul>
