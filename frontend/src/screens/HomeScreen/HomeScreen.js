@@ -15,6 +15,6 @@ export default function HomeScreen(props) {
     }
 
     return(
-        <RecOnboarding />
+        <RecOnboarding {...props} />
     )
 }

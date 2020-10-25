@@ -15,7 +15,7 @@ export default function RecOnboarding(props) {
 
   const handlePress = () => {
     //store on firebase
-
+    props.navigation.navigate("Botnav")
     //navigate to next screen
   }
 
