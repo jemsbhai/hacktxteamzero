@@ -39,3 +39,7 @@ h5 {
 button {
     background-color: #34F4F9;
 }
+
+p {
+    text-align: justify;
+}
